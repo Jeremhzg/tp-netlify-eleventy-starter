@@ -6,7 +6,7 @@ eleventyNavigation:
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>Tailwind CSS Modal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
@@ -22,8 +22,8 @@ eleventyNavigation:
 </head>
 
 <body class="bg-gray-200 flex items-center justify-center h-screen">
-
-<button class="modal-open bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-2 px-4 rounded-full">Open Modal</button>
+<div x-data="{open: false}">
+<button class="modal-open bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-2 px-4 rounded-full " @click="open = !open">Affiche/Cache dialogue</button>
 
 <!--Modal-->
 <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -42,7 +42,7 @@ eleventyNavigation:
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold">Simple Modal!</p>
+                <p class="text-2xl font-bold">Un modal tout simple</p>
                 <div class="modal-close cursor-pointer z-50">
                     <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                         <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -51,13 +51,17 @@ eleventyNavigation:
             </div>
 
             <!--Body-->
-            <p>Modal content can go here</p>
-            <div x-data="{open: false}">
-                <button @click="open = !open">
-                    Affiche/Cache dialogue
-                </button>
+
                 <dialog :open="open">
-                    Contenu dialogue
+                    <div x-data="{imageUrl:null}">
+                        <ul>
+                            <li><img src="/assets/images/thumbnails/animals-1.jpeg" alt="un animal" @click="imageUrl = '/assets/images/animals-1.jpeg'"></li>
+                            <li><img src="/assets/images/thumbnails/animals-2.jpeg" alt="un animal" @click="imageUrl = '/assets/images/animals-2.jpeg'"></li>
+                        </ul>
+                        <div x-show="!!imageUrl" @click.away="imageUrl=null">
+                            <img :src="imageUrl" alt="">
+                        </div>
+                    </div>
                 </dialog>
             </div>
 
