@@ -7,6 +7,9 @@ module.exports = {
     enabled: false,
   },
   theme: {
+    fontFamily:{
+      'display': ['Helvetica', 'Arial', `sans-serif`]
+    },
     extend: {
       colors:{
         'regal-blue' : '#243c5a'
